@@ -1,14 +1,27 @@
+//Random apareance for the Mole and the plant
 let currentMolePipe;
 let currentPlantPipe;
+//Score
 let score = 0;
-let plantClicked = false;
+let SCORE_TO_WIN = 500;
+//Plant clicked
+let losedGame = false;
+//Interval of the apareance of the Mole and the Plant
 let moleInterval;
 let plantInterval;
-let BOARD_SIZE = 3;
 let MOLE_INTERVAL = 750;
 let PLANT_INTERVAL = MOLE_INTERVAL * 2;
-let SCORE_TO_WIN = 500;
+//Size of the board
+let BOARD_SIZE = 3;
+//Difficulty selected by the user
 let clickedDifficulty;
+//Audios
+let tapOnMoleAudio = new Audio('./src/sounds/tap-on-mole.wav');
+let winGameAudio = new Audio('./src/sounds/game-winned.wav');
+let loseGameAudio = new Audio('./src/sounds/game-losed.wav');
+//Time
+let countdownInterval;
+let countdownValue = 30;
 
 window.onload = () => {
     setPipes();
@@ -39,6 +52,7 @@ function setGame() {
             MOLE_INTERVAL = 750;
             break;
     }
+    startCountdown();
     //Change the position of the Mole every 2 seconds
     moleInterval = setInterval(setMole, MOLE_INTERVAL);
     plantInterval = setInterval(setPlant, PLANT_INTERVAL);
@@ -46,15 +60,19 @@ function setGame() {
 
 function resetGame() {
     let body = document.getElementsByTagName('body')[0];
-    body.style.color = 'rgb(180, 121, 12)';
     let scoreElement = document.getElementById('score');
+    let countDownElement = document.getElementById('countdown');
+
+    countdownValue = 30
+    countDownElement.innerText = countdownValue.toString();
+    body.style.color = 'rgb(180, 121, 12)';
     scoreElement.style.color = 'rgb(180, 121, 12)';
     clearInterval(moleInterval);
     clearInterval(plantInterval);
     currentMolePipe = null;
     currentPlantPipe = null;
     score = 0;
-    plantClicked = false;
+    losedGame = false;
     document.getElementById('score').innerText = '0';
     let board = document.getElementById('board');
     while (board.firstChild) {
@@ -134,31 +152,38 @@ function setPlant() {
 }
 
 function checkTheEnd() {
-    let title = document.getElementById('title');
-    let scoreElement = document.getElementById('score');
-
-    if (plantClicked || score >= SCORE_TO_WIN) {
+    if (losedGame || score >= SCORE_TO_WIN) {
         if (score >= SCORE_TO_WIN) {
             playWinSound();
         }
-        clearInterval(moleInterval);
-        clearInterval(plantInterval);
-        title.style.color = plantClicked ? 'red' : 'green';
-        scoreElement.style.color = plantClicked ? 'red' : 'green';
-        // Remove Event listeners at the end of the game
-        removeEventListeners();
-        title.innerText = plantClicked ? 'YOU LOSED' : 'YOU HAVE WOONED';
-        //Create a restart btn
-        let restartBtn = document.createElement('button');
-        restartBtn.innerText = 'Restart';
-        restartBtn.id = 'restartBtn';
-        restartBtn.addEventListener('click', resetGame);
-        //Add it to the html
-        let topVar = document.getElementById('top-var');
-        topVar.appendChild(restartBtn);
+        if(countdownValue <= 0){
+            playLoseSound();
+        }
+        clearInterval(countdownInterval);
+        setTheEnd();
     }
 }
 
+function setTheEnd() {
+    let title = document.getElementById('title');
+    let scoreElement = document.getElementById('score');
+
+    clearInterval(moleInterval);
+    clearInterval(plantInterval);
+    title.style.color = losedGame ? 'red' : 'green';
+    scoreElement.style.color = losedGame ? 'red' : 'green';
+    // Remove Event listeners at the end of the game
+    removeEventListeners();
+    title.innerText = losedGame ? 'YOU LOSED' : 'YOU HAVE WOONED';
+    //Create a restart btn
+    let restartBtn = document.createElement('button');
+    restartBtn.innerText = 'Restart';
+    restartBtn.id = 'restartBtn';
+    restartBtn.addEventListener('click', resetGame);
+    //Add it to the html
+    let topVar = document.getElementById('top-var');
+    topVar.appendChild(restartBtn);
+}
 
 function removeEventListeners() {
     let moles = document.querySelectorAll('#board img[src="src/imgs/mole.webp"]');
@@ -182,21 +207,45 @@ function handleMoleClick() {
 
 function handlePlantClick() {
     playLoseSound();
-    plantClicked = true;
+    losedGame = true;
     checkTheEnd();
 }
 
+//Countdown functions: 
+function startCountdown() {
+    countdownInterval = setInterval(function () {
+        countdownValue--;
+        updateCountdown();
+
+        if (countdownValue <= 0) {
+            clearInterval(countdownInterval);
+            handleTimeout(); // Define this function to handle the end of time
+        }
+    }, 1000); // The interval is 1 second (1000 milliseconds)
+}
+
+function updateCountdown() {
+    document.getElementById('countdown').innerText = countdownValue;
+}
+
+function handleTimeout() {
+    losedGame = true;
+    checkTheEnd();
+}
+
+//The audios are cloned in orther to be played multiple times at the same time, especially when you click to time a MoleVery quickly
 function playWhackSound() {
-    var audio = document.getElementById("whack-audio");
-    audio.play();
+    let soundCloned = tapOnMoleAudio.cloneNode(true);
+    soundCloned.play();
 }
 
 function playWinSound() {
-    var audio = document.getElementById("win-audio");
-    audio.play();
+    let soundCloned = winGameAudio.cloneNode(true);
+    soundCloned.play();
 }
 
 function playLoseSound() {
-    var audio = document.getElementById("lose-audio");
-    audio.play();
+    let soundCloned = loseGameAudio.cloneNode(true);
+    soundCloned.play();
 }
+

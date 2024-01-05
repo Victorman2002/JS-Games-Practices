@@ -17,6 +17,22 @@ body {
     height: 20%;
 }
 
+#top-var h1 {
+    padding: 0;
+    margin: 0;
+}
+
+#top-var h2 {
+    padding: 0;
+    margin: 0;
+    color: black;
+}
+
+#clock-image{
+    width: 20px;
+    height: 20px;
+}
+
 #board {
     width: 432px;
     height: 432px;
