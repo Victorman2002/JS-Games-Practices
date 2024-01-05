@@ -39,7 +39,7 @@ body {
 #board div img {
     width: 80px;
     height: 80px;
-    /*This make that the User cant select accidentaly the images while playin*/
+    /*This makes sure the user can't accidentally select the images while playing*/
     user-select: none;
     -moz-user-select: none;
     -webkit-user-drag: none;
@@ -67,4 +67,37 @@ body {
 
 .difficulty:hover {
     color: white;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    #board {
+        width: 80%;
+        height: auto;
+        padding: 0;
+    }
+
+    #board div {
+        box-sizing: border-box;
+        /* Ensure that width and height include padding and borders */
+        width: 33.33%;
+        height: 30vw;
+        /* Adjust as needed */
+        background-image: url("../imgs/pipe.png");
+        background-position: center;
+    }
+
+    #board div img {
+        width: 55%;
+        height: 55%;
+    }
+
+    #difficulty-1,
+    #difficulty-2,
+    #difficulty-3 {
+        font-size: medium;
+    }
 }
