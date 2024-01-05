@@ -1,0 +1,70 @@
+body {
+    color: rgb(180, 121, 12);
+    font-family: 'New Super Mario Font U', sans-serif;
+    text-align: center;
+    background: url("../imgs/mario-bg.jpg");
+    background-size: cover;
+    overflow-y: hidden;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#top-var {
+    width: 100%;
+    height: 20%;
+}
+
+#board {
+    width: 432px;
+    height: 432px;
+    background-image: url("../imgs/soil.jpg");
+    background-size: cover;
+    border: 3px solid white;
+    border-radius: 10%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#board div {
+    width: 144px;
+    height: 144px;
+    background-image: url("../imgs/pipe.png");
+    background-size: cover;
+}
+
+#board div img {
+    width: 80px;
+    height: 80px;
+    /*This make that the User cant select accidentaly the images while playin*/
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#restartBtn {
+    background-color: rgb(180, 121, 12);
+    color: white;
+    border-radius: 10%;
+    margin-bottom: 5vh;
+    font-size: x-large;
+    font-family: 'New Super Mario Font U', sans-serif;
+}
+
+.difficulty {
+    color: black;
+    font-size: xx-large;
+    font-weight: bold;
+    display: inline-block;
+    text-decoration: none;
+    user-select: none;
+}
+
+.difficulty:hover {
+    color: white;
+}

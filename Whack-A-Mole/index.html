@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack a Mole - Game</title>
+    <link rel="stylesheet" href="src/styles/style.css">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/new-super-mario-font-u">
+</head>
+
+<body>
+
+    <div id="top-var">
+        <h1 id="title">Whack a Mole</h1>
+        <h2 id="score">0</h2>
+    </div>
+
+    <div id="board"></div>
+
+    <h2>
+        Difficulty
+        <div class="difficulty" id="difficulty-1">1</div>
+        <div class="difficulty" id="difficulty-2">2</div>
+        <div class="difficulty" id="difficulty-3">3</div>
+    </h2>
+
+    <audio id="whack-audio">
+        <source src="/src/sounds/tap-on-mole.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="win-audio">
+        <source src="/src/sounds/game-winned.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="lose-audio">
+        <source src="/src/sounds/game-losed.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="src/scripts/index.js"></script>
+</body>
+
+</html>
