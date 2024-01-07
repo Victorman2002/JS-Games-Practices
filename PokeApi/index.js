@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .addEventListener('click', searchPokemonImg);
     }
 });
-    
+
 function searchPokemonImg() {
     let imageContainer = document.getElementById('pokemon-image-container');
     let loadingAnimation = document.getElementById('loading-animation');
@@ -13,6 +13,10 @@ function searchPokemonImg() {
 
     // Ocultar la imagen y mostrar el GIF de carga
     removeAllImgChildren(imageContainer);
+    if (loadingAnimation == null) {
+        location.reload();
+    }
+    
     loadingAnimation.style.display = 'block';
 
     //Request

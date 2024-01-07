@@ -3,6 +3,10 @@ body {
     text-align: center;
     margin-top: 5%;
     padding: 0;
+    background-color: #000000;
+    color: white;
+    display: flex;
+    justify-content: center;
 }
 
 input {
@@ -15,12 +19,20 @@ img {
     height: 200px;
 }
 
+#general-container {
+    width: 500px;
+    height: 325px;
+    border-radius: 15px;
+    border: 5px solid white;
+}
+
 #pokemon-image-container {
     display: flex;
     justify-content: center;
 }
 
-/*Animation*/
+/* Loading Animation*/
+
 #loading-animation {
     position: relative;
     height: 10px;
@@ -33,11 +45,12 @@ img {
 
 #loading-animation .color {
     position: absolute;
-    background-color: #000000;
+    background-color: #d69914;
     width: 0px;
     height: 10px;
     border-radius: 15px;
-    animation: loadingAnimation 2s infinite linear; /* Corrige el nombre de la animación */
+    animation: loadingAnimation 2s infinite linear;
+    /* Corrige el nombre de la animación */
 }
 
 @keyframes loadingAnimation {
