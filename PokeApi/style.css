@@ -1,0 +1,63 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    margin-top: 5%;
+    padding: 0;
+}
+
+input {
+    display: inline-block;
+    margin: 10px;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+#pokemon-image-container {
+    display: flex;
+    justify-content: center;
+}
+
+/*Animation*/
+#loading-animation {
+    position: relative;
+    height: 10px;
+    width: 20%;
+    border: 5px solid yellow;
+    border-radius: 15px;
+    margin: 10px;
+    display: none;
+}
+
+#loading-animation .color {
+    position: absolute;
+    background-color: #000000;
+    width: 0px;
+    height: 10px;
+    border-radius: 15px;
+    animation: loadingAnimation 2s infinite linear; /* Corrige el nombre de la animación */
+}
+
+@keyframes loadingAnimation {
+    0% {
+        width: 0%;
+    }
+
+    25% {
+        width: 25%;
+    }
+
+    50% {
+        width: 50%;
+    }
+
+    75% {
+        width: 75%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
